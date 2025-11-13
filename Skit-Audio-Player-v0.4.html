@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VKK SKIT 2025 - Audio Player </title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+        }
+
+        h1 img {
+            height: 32px;
+            width: 48px;
+            border-radius: 4px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            margin-top: 0;
+            color: #333;
+        }
+
+        section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            text-align: left;
+        }
+
+        .track {
+            margin-bottom: 24px;
+        }
+
+        audio {
+            display: block;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        b {
+            color: #222;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>
+        <img src="https://upload.wikimedia.org/wikipedia/kn/e/e2/Map_karnataka_flag.JPG" alt="Karnataka map icon" style="height:32px; width:auto; vertical-align:middle; margin-right:8px;">
+        Audio Player for VKK SKIT - 2025
+        <img src="https://upload.wikimedia.org/wikipedia/kn/e/e2/Map_karnataka_flag.JPG" alt="Karnataka map icon" style="height:32px; width:auto; vertical-align:middle; margin-left:8px;">
+    </h1>
+
+
+
+    <p>🎧 Click anywhere, then press <b>1</b> or <b>2</b> or <b>3</b> to play / pause.</p>
+
+    <section id="audioSection">
+        <div class="track">
+            <b>Press 1</b> — Introduction and Disclaimer
+            <audio id="audio1" src="01-Tuntru-2025-Scene1-Intro.mp3" controls></audio>
+        </div><br>
+        <hr><br>
+
+        <div class="track">
+            <b>Press 2</b> — ಬಂದರೂ ಬಂದರು ಭಾವ ಬಂದರು…
+            <audio id="audio2" src="02-BandaroBandaru-Tuntru.mp3" controls></audio>
+        </div><br>
+        <hr><br>
+
+        <div class="track">
+            <b>Press 3</b> — Danks Anthem
+            <audio id="audio3" src="03-DanksAnthem-Tuntru.mp3" controls></audio>
+        </div>
+    </section>
+
+    <section id="skitScriptSection">
+        <details>
+            <summary style="cursor: pointer; font-weight: bold;">
+                SKIT Script - click to Expand / Collapse
+            </summary>
+            <p>Uncomment to access</p>
+            <!--
+            <iframe src="https://docs.google.com/document/d/1QsihDsbkA9C1Rqlt6-AS26n_sJGiWkO4mtcg1Jhpnns/preview" width="100%" height="600px" style="border:1px solid #ccc;">
+            </iframe>
+-->
+        </details>
+    </section>
+
+
+
+    <script>
+        const audioMap = {
+            '1': document.getElementById('audio1'),
+            '2': document.getElementById('audio2'),
+            '3': document.getElementById('audio3')
+        };
+
+        // Focus window on first click (for autoplay permission)
+        window.addEventListener('click', () => window.focus(), {
+            once: true
+        });
+
+        document.addEventListener('keydown', event => {
+            const audio = audioMap[event.key];
+            if (!audio) return;
+
+            // Stop all other audios
+            Object.values(audioMap).forEach(a => {
+                if (a !== audio) {
+                    a.pause();
+                    a.currentTime = 0;
+                }
+            });
+
+            // Toggle: play from start if paused, stop if playing
+            if (audio.paused) {
+                audio.currentTime = 0;
+                audio.play().catch(err => console.warn('Playback blocked:', err.message));
+            } else {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        });
+
+    </script>
+</body>
+
+</html>
